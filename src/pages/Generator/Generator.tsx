@@ -101,11 +101,6 @@ const Generator = () => {
             )}
             {isAdvanced ? (
                 <div>
-                    <h1 className="text-4xl font-bold mb-6">Advanced Mode</h1>
-                    <CustomCheckbox checked={complexMode} onChange={() => setComplexMode(!complexMode)} label="Complex Mode" />
-                    <CustomCheckbox checked={includeNumbers} onChange={() => setIncludeNumbers(!includeNumbers)} label="Include Numbers" />
-                    <CustomCheckbox checked={includeSymbols} onChange={() => setIncludeSymbols(!includeSymbols)} label="Include Symbols" />
-                    <CustomCheckbox checked={includeUppercase} onChange={() => setIncludeUppercase(!includeUppercase)} label="Include Uppercase Letters" />
                     <div className="mb-4">
                         <Typography id="passwordLength" gutterBottom>
                             Password Length: {passwordLength}
@@ -119,6 +114,12 @@ const Generator = () => {
                             valueLabelDisplay="auto"
                             sx={{ color: 'white' }}
                         />
+                    </div>
+                    <div className="grid grid-cols-2 gap-4 mb-4">
+                        <CustomCheckbox checked={complexMode} onChange={() => setComplexMode(!complexMode)} label="Complex Mode" />
+                        <CustomCheckbox checked={includeNumbers} onChange={() => setIncludeNumbers(!includeNumbers)} label="Include Numbers" />
+                        <CustomCheckbox checked={includeSymbols} onChange={() => setIncludeSymbols(!includeSymbols)} label="Include Symbols" />
+                        <CustomCheckbox checked={includeUppercase} onChange={() => setIncludeUppercase(!includeUppercase)} label="Include Uppercase Letters" />
                     </div>
                     <Button onClick={handleGeneratePassword} className="mb-4">
                         Generate Password
@@ -146,40 +147,27 @@ const Generator = () => {
                         <CustomCheckbox checked={useCustomList} onChange={() => setUseCustomList(!useCustomList)} label="Use Custom Words" />
                         <CustomCheckbox checked={replaceChars} onChange={() => setReplaceChars(!replaceChars)} label="Use Special Characters" />
                     </div>
-                    <div className="mb-4">
-                        <Typography id="passwordLength" gutterBottom>
-                            Password Length: {passwordLength}
-                        </Typography>
-                        <Slider
-                            value={passwordLength}
-                            onChange={(_e, value) => setPasswordLength(value as number)}
-                            aria-labelledby="passwordLength"
-                            min={8}
-                            max={32}
-                            valueLabelDisplay="auto"
-                            sx={{ color: 'white' }}
-                        />
-                    </div>
                     <Button onClick={handleGeneratePassword} className="mb-4">
                         Generate Password
                     </Button>
-                    {password && (
-                        <div className="bg-indigo-500 text-white font-bold py-2 px-4 rounded-lg mt-4">
-                            {password}
-                        </div>
-                    )}
-                    {password && (
-                        <div className={`mt-2 text-lg font-bold ${passwordStrength === 'Weak' ? 'text-red-500' : passwordStrength === 'Moderate' ? 'text-yellow-500' : 'text-green-500'}`}>
-                            Strength: {passwordStrength}
-                        </div>
-                    )}
-                    {password && (
-                        <div className="flex space-x-4 mt-4">
-                            <Button onClick={handleCopyPassword}>
-                                Copy Password
-                            </Button>
-                        </div>
-                    )}
+
+                </div>
+            )}
+            {password && (
+                <div className="bg-indigo-500 text-white font-bold py-2 px-4 rounded-lg mt-4">
+                    {password}
+                </div>
+            )}
+            {password && (
+                <div className={`mt-2 text-lg font-bold ${passwordStrength === 'Weak' ? 'text-red-500' : passwordStrength === 'Moderate' ? 'text-yellow-500' : 'text-green-500'}`}>
+                    Strength: {passwordStrength}
+                </div>
+            )}
+            {password && (
+                <div className="flex space-x-4 mt-4">
+                    <Button onClick={handleCopyPassword}>
+                        Copy Password
+                    </Button>
                 </div>
             )}
         </div>
