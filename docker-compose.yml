@@ -4,12 +4,13 @@ services:
   app:
     build:
       context: ./frontend
+      dockerfile: Dockerfile
     container_name: genpass-app
     ports:
       - "84:3000"
     environment:
       - NODE_ENV=production
     volumes:
-      - .:/app
+      - ./frontend:/app
       - /app/node_modules
     command: npm start
