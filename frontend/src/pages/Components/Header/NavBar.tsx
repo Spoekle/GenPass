@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 const NavBar = () => {
     return (
         <nav className="absolute top-0 flex space-x-3 bg-neutral-900  w-full  text-white py-6 text-center">
-            <div className="container grid md:flex mx-auto space-x-3 px-4 items-center">
+            <div className="container flex mx-auto space-x-3 px-4 items-center">
                 <div className="flex items-center space-x-2 mr-4">
                     <div className="w-8 h-8 bg-indigo-500 rounded-full"></div>
                     <h2 className="text-xl font-semibold text-indigo-500">GenPass</h2>

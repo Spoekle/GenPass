@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { setPasswordOptions, getPasswordOptions, importOptionsFromFile, exportOptionsToFile } from '../../helper/Passwords/Editor';
 import Button from './components/Button';
 import { useAlert, AlertProvider } from './components/AlertContext';
+import MobileWordList from './components/MobileWordList';
 
 const Editor = () => {
     const [options, setOptions] = useState<string[]>([]);
@@ -60,13 +61,14 @@ const Editor = () => {
     };
 
     return (
-        <div className="flex items-center justify-center h-screen bg-neutral-900 text-white">
+        <div className="grid grid-cols-1 md:grid-cols-2 items-center justify-center h-screen bg-neutral-900 text-white">
             <div className="flex flex-col items-center">
-                <h1 className="text-4xl font-bold mb-6">Password Config Editor</h1>
+                <h1 className="text-4xl font-bold mb-6 text-center">Password Config Editor</h1>
                 <input
                     type="text"
                     value={newOption}
                     onChange={(e) => setNewOption(e.target.value)}
+                    onKeyDown={(e) => e.key === 'Enter' && addOption()}
                     placeholder="Add new word"
                     className="mb-4 p-2 rounded bg-neutral-800 text-white"
                 />
@@ -102,21 +104,28 @@ const Editor = () => {
                 <Button onClick={handleExport} className="mb-4">Export Words</Button>
                 {options.length > 0 && <Button onClick={clearOptions} className="mb-4 bg-red-500/10 border-red-500">Clear Words</Button>}
             </div>
-            <ul className="w-full max-w-md ml-8">
-                {options.length === 0 ? (
-                    <li className="text-center text-gray-500 border-2 border-dashed border-gray-500 p-4 bg-neutral-800/50 rounded-lg">No words added yet. Add some words to get started!</li>
-                ) : (
-                    <>
-                        <h2 className="text-xl font-bold mb-4">Current words ({options.length}):</h2>
-                        {options.map((option, index) => (
-                            <li key={index} className="flex items-center justify-between mb-2 p-2 bg-neutral-800 rounded-lg">
-                                {option}
-                                <Button onClick={() => removeOption(index)} className="ml-4">Remove</Button>
-                            </li>
-                        ))}
-                    </>
-                )}
-            </ul>
+            <div className="hidden md:block w-full max-w-md mx-8">
+                <h2 className="text-xl font-bold mb-4">Current words ({options.length}):</h2>
+                <ul className="hidden md:block w-full max-w-md overflow-y-scroll max-h-[80vh]">
+                    {options.length === 0 ? (
+                        <li className="text-center text-gray-500 border-2 border-dashed border-gray-500 p-4 bg-neutral-800/50 rounded-lg">No words added yet. Add some words to get started!</li>
+                    ) : (
+                        <>
+
+                            {options.map((option, index) => (
+                                <li key={index} className="flex items-center justify-between mb-2 p-2 bg-neutral-800 rounded-lg">
+                                    {option}
+                                    <Button onClick={() => removeOption(index)} className="ml-4">Remove</Button>
+                                </li>
+                            ))}
+                        </>
+                    )}
+                </ul>
+            </div>
+            <MobileWordList
+                options={options}
+                removeOption={removeOption}
+            />
         </div>
     );
 };

@@ -6,7 +6,7 @@ const Footer = () => {
 
     return (
         <footer className="absolute bottom-0 bg-neutral-900 w-full justify-between text-white py-6 text-center">
-            <div className="container grid md:flex mx-auto justify-center px-4 md:justify-between items-center">
+            <div className="container grid md:flex mb-8 md:mb-0 mx-auto justify-center px-4 md:justify-between items-center">
                 <p className="flex text-md">
                     © {new Date().getFullYear()} Spoekle. All rights reserved.
                     <Link to="/privacystatement" className='ml-2 underline text-indigo-500 hover:text-blurple-dark transition duration-200'>

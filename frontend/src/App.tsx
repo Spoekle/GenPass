@@ -9,7 +9,7 @@ import Footer from './pages/Components/Footer/Footer';
 
 function App() {
     return (
-        <div className="min-h-screen min-w-screen bg-neutral-900 text-white font-sans leading-6 font-normal antialiased">
+        <div className="min-h-screen min-w-screen overflow-hidden bg-neutral-900 text-white font-sans leading-6 font-normal antialiased">
             <Router>
                 <NavBar />
                 <Routes>
