@@ -1,4 +1,3 @@
-# Build stage
 FROM node:18-alpine AS build
 
 # Set the working directory
@@ -15,6 +14,9 @@ COPY . .
 
 # Build the application
 RUN npm run build
+
+# List the contents of the build directory for debugging
+RUN ls -la /app/dist
 
 # Production stage
 FROM nginx:alpine
