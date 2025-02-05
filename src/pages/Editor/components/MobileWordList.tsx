@@ -28,9 +28,8 @@ const MobileWordList: React.FC<MobileWordListProps> = ({ options, removeOption }
                 <Button onClick={() => toggleList()} className="w-full flex items-center text-center justify-center rounded-t-lg rounded-b-none backdrop-blur-sm"><FaArrowUp /> Word List <FaArrowUp /></Button>
             )}
             <div className={`relative flex flex-col w-full bg-neutral-900/70 backdrop-blur-sm rounded-lg p-4 overflow-hidden slide-up ${isListOpen ? 'open' : ''}`}>
-                <div className='absolute bottom-0 left-0 w-full h-16 bg-gradient-to-t from-neutral-900 to-transparent z-30'></div>
                 <h1 className="text-2xl font-bold mb-8 z-20">Current Words ({options.length}):</h1>
-                <ul className="relative z-20 grid grid-cols-1 sm:grid-cols-2 gap-4 w-full rounded-lg overflow-y-scroll max-h-[50vh]">
+                <ul className="relative z-20 grid grid-cols-1 sm:grid-cols-2 gap-4 w-full rounded-lg overflow-y-auto max-h-[50vh]">
                     {options.length === 0 ? (
                         <li className="text-center text-gray-500 border-2 border-dashed border-gray-500 p-4 bg-neutral-800/50 rounded-lg">No words added yet. Add some words to get started!</li>
                     ) : (

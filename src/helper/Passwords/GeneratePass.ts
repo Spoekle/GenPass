@@ -8,7 +8,21 @@ export const standardOptions = [
     'cat',
     'elephant',
     'tiger',
-    'giraffe'
+    'giraffe',
+    'monkey',
+    'penguin',
+    'parrot',
+    'hamster',
+    'rabbit',
+    'goldfish',
+    'dolphin',
+    'whale',
+    'shark',
+    'white',
+    'yellow',
+    'spicy',
+    'offroad',
+    'after',
 ];
 
 export const getCustomOptions = (): string[] => {
@@ -29,11 +43,13 @@ export const shuffleArray = (array: string[]): string[] => {
 };
 
 const charReplacementMap: { [key: string]: string } = {
-    'e': '3',
+    'E': '3',
     'a': '@',
-    's': '$',
+    'S': '$',
     'o': '0',
     'i': '!',
+    't': '7',
+    'B': '8',
 };
 
 const replaceCharacters = (str: string): string => {

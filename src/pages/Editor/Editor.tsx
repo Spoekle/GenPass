@@ -106,7 +106,7 @@ const Editor = () => {
             </div>
             <div className="hidden md:block w-full max-w-md mx-8">
                 <h2 className="text-xl font-bold mb-4">Current words ({options.length}):</h2>
-                <ul className="hidden md:block w-full max-w-md overflow-y-scroll max-h-[80vh]">
+                <ul className="hidden md:block w-full max-w-md overflow-y-auto max-h-[80vh]">
                     {options.length === 0 ? (
                         <li className="text-center text-gray-500 border-2 border-dashed border-gray-500 p-4 bg-neutral-800/50 rounded-lg">No words added yet. Add some words to get started!</li>
                     ) : (
