@@ -7,21 +7,26 @@ import CustomCheckbox from './components/CustomCheckbox';
 import { useAlert, AlertProvider } from './components/AlertContext';
 
 const Generator = () => {
+    const savedOptions = JSON.parse(localStorage.getItem("genpassOptions") || '{}');
     const [password, setPassword] = useState('');
-    const [numOptions, setNumOptions] = useState(2);
-    const [passwordLength, setPasswordLength] = useState(12);
-    const [segmentCount, setSegmentCount] = useState(3);
-    const [useSegments, setUseSegments] = useState(true);
-
-    const [useCustomList, setUseCustomList] = useState(false);
-    const [useDefaultList, setUseDefaultList] = useState(true);
-    const [replaceChars, setReplaceChars] = useState(true);
-    const [isAdvanced, setIsAdvanced] = useState(false);
-    const [includeNumbers, setIncludeNumbers] = useState(false);
-    const [includeSymbols, setIncludeSymbols] = useState(false);
-    const [includeUppercase, setIncludeUppercase] = useState(false);
+    const [numOptions, setNumOptions] = useState(savedOptions.numOptions ?? 2);
+    const [passwordLength, setPasswordLength] = useState(savedOptions.passwordLength ?? 12);
+    const [segmentCount, setSegmentCount] = useState(savedOptions.segmentCount ?? 3);
+    const [useSegments, setUseSegments] = useState(savedOptions.useSegments ?? true);
+    const [useCustomList, setUseCustomList] = useState(savedOptions.useCustomList ?? false);
+    const [useDefaultList, setUseDefaultList] = useState(savedOptions.useDefaultList ?? true);
+    const [replaceChars, setReplaceChars] = useState(savedOptions.replaceChars ?? true);
+    const [isAdvanced, setIsAdvanced] = useState(savedOptions.isAdvanced ?? false);
+    const [includeNumbers, setIncludeNumbers] = useState(savedOptions.includeNumbers ?? false);
+    const [includeSymbols, setIncludeSymbols] = useState(savedOptions.includeSymbols ?? false);
+    const [includeUppercase, setIncludeUppercase] = useState(savedOptions.includeUppercase ?? false);
     const [passwordStrength, setPasswordStrength] = useState('');
     const { addAlert } = useAlert();
+
+    useEffect(() => {
+        const opts = { numOptions, passwordLength, segmentCount, useSegments, useCustomList, useDefaultList, replaceChars, isAdvanced, includeNumbers, includeSymbols, includeUppercase };
+        localStorage.setItem("genpassOptions", JSON.stringify(opts));
+    }, [numOptions, passwordLength, segmentCount, useSegments, useCustomList, useDefaultList, replaceChars, isAdvanced, includeNumbers, includeSymbols, includeUppercase]);
 
     useEffect(() => {
         generatePassword(getStandardOptions(), 2, false);
@@ -174,7 +179,6 @@ const Generator = () => {
                     <Button onClick={handleGeneratePassword} className="mb-4 border-green-500 bg-green-500/10">
                         Generate Password
                     </Button>
-
                 </div>
             )}
             {password && (

@@ -15,7 +15,7 @@ const Editor = () => {
 
     const addOption = () => {
         if (newOption.trim() === '') {
-            addAlert('Words gotta have letters dummy :D', 'error');
+            addAlert('Words gotta have letters silly :D', 'error');
             return;
         }
         const updatedOptions = [...options, newOption.trim().toLowerCase()];
@@ -39,13 +39,13 @@ const Editor = () => {
                 setOptions(updatedOptions);
                 setPasswordOptions(updatedOptions);
             });
-            addAlert('Options imported successfully', 'success');
+            addAlert('Words imported successfully!', 'success');
         }
     };
 
     const handleExport = () => {
         if (options.length === 0) {
-            addAlert('No options to export', 'error');
+            addAlert('No words to export', 'error');
             return;
         }
         exportOptionsToFile(options);
@@ -58,6 +58,7 @@ const Editor = () => {
         }
         setOptions([]);
         setPasswordOptions([]);
+        addAlert('Words cleared successfully!', 'success');
     };
 
     return (

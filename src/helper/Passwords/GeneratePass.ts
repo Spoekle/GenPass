@@ -1,6 +1,4 @@
-import standardOptions from './json/standardOptions.json';
-
-
+import * as standardOptions from './options/StandardOptions';
 
 export const getCustomOptions = (): string[] => {
     const savedOptions = localStorage.getItem('passwordOptions');
