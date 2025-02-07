@@ -29,7 +29,7 @@ export const AlertProvider: React.FC<{ children: ReactNode }> = ({ children }) =
     return (
         <AlertContext.Provider value={{ addAlert }}>
             {children}
-            <div className="absolute top-4 right-4 space-y-2 overflow-hidden">
+            <div className="absolute top-24 right-4 space-y-2 overflow-hidden">
                 {alerts.map((alert) => (
                     <Alert key={alert.id} message={alert.message} type={alert.type} onClose={() => {}} />
                 ))}

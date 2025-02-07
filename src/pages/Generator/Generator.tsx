@@ -8,14 +8,14 @@ import { useAlert, AlertProvider } from './components/AlertContext';
 
 const Generator = () => {
     const [password, setPassword] = useState('');
-    const [numOptions, setNumOptions] = useState(1);
+    const [numOptions, setNumOptions] = useState(2);
     const [passwordLength, setPasswordLength] = useState(12);
     const [segmentCount, setSegmentCount] = useState(3);
     const [useSegments, setUseSegments] = useState(true);
 
     const [useCustomList, setUseCustomList] = useState(false);
     const [useDefaultList, setUseDefaultList] = useState(true);
-    const [replaceChars, setReplaceChars] = useState(false);
+    const [replaceChars, setReplaceChars] = useState(true);
     const [isAdvanced, setIsAdvanced] = useState(false);
     const [includeNumbers, setIncludeNumbers] = useState(false);
     const [includeSymbols, setIncludeSymbols] = useState(false);
@@ -49,20 +49,33 @@ const Generator = () => {
 
     const calculatePasswordStrength = (password: string) => {
         let strength = 0;
-        if (password.length >= 8) strength += 1;
-        if (/[A-Z]/.test(password)) strength += 1;
-        if (/[0-9]/.test(password)) strength += 1;
-        if (/[^A-Za-z0-9]/.test(password)) strength += 1;
+        const lengthCriteria = password.length >= 12;
+        const uppercaseCriteria = /[A-Z]/.test(password);
+        const lowercaseCriteria = /[a-z]/.test(password);
+        const numberCriteria = /[0-9]/.test(password);
+        const symbolCriteria = /[^A-Za-z0-9]/.test(password);
+        const uniqueCharCriteria = new Set(password).size >= password.length * 0.7;
+
+        if (lengthCriteria) strength += 1;
+        if (uppercaseCriteria) strength += 1;
+        if (lowercaseCriteria) strength += 1;
+        if (numberCriteria) strength += 1;
+        if (symbolCriteria) strength += 1;
+        if (uniqueCharCriteria) strength += 1;
 
         switch (strength) {
             case 0:
             case 1:
-                return 'Weak';
             case 2:
-                return 'Moderate';
+                return 'Very Weak';
             case 3:
+                return 'Weak';
             case 4:
+                return 'Moderate';
+            case 5:
                 return 'Strong';
+            case 6:
+                return 'Very Strong';
             default:
                 return '';
         }

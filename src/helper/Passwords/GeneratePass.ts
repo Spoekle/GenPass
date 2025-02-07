@@ -1,29 +1,6 @@
-export const standardOptions = [
-    'dog',
-    'lizard',
-    'turtle',
-    'dragon',
-    'watermelon',
-    'horse',
-    'cat',
-    'elephant',
-    'tiger',
-    'giraffe',
-    'monkey',
-    'penguin',
-    'parrot',
-    'hamster',
-    'rabbit',
-    'goldfish',
-    'dolphin',
-    'whale',
-    'shark',
-    'white',
-    'yellow',
-    'spicy',
-    'offroad',
-    'after',
-];
+import standardOptions from './json/standardOptions.json';
+
+
 
 export const getCustomOptions = (): string[] => {
     const savedOptions = localStorage.getItem('passwordOptions');
@@ -31,7 +8,7 @@ export const getCustomOptions = (): string[] => {
 };
 
 export const getStandardOptions = (): string[] => {
-    return standardOptions;
+    return standardOptions.standardOptions;
 };
 
 export const shuffleArray = (array: string[]): string[] => {
@@ -48,13 +25,15 @@ const charReplacementMap: { [key: string]: string } = {
     'S': '$',
     'o': '0',
     'i': '!',
-    't': '7',
     'B': '8',
+    'l': '1',
+    't': '+',
+    's': '$'
 };
 
 const replaceCharacters = (str: string): string => {
     return str.split('').map(char => {
-        if (charReplacementMap[char.toLowerCase()] && Math.random() < 0.5) {
+        if (charReplacementMap[char.toLowerCase()] && Math.random() < 0.3) {
             return charReplacementMap[char.toLowerCase()];
         }
         return char;
@@ -80,6 +59,9 @@ export const generatePassword = (
     if (replaceChars) {
         password = replaceCharacters(password);
     }
+
+    const randomNumbers = Math.floor(Math.random() * 90 + 10);
+    password += randomNumbers.toString();
 
     return password;
 };

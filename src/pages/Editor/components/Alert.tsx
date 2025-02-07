@@ -26,7 +26,7 @@ const Alert: React.FC<AlertProps> = ({ message, type, onClose }) => {
     };
 
     return (
-        <div className={`p-4 rounded text-white ${getColor()} rounded-lg border-2 text-white ${getColor()} animate-fade-left`}>
+        <div className={`p-4 rounded text-white font-bold ${getColor()} rounded-lg border-2 text-white backdrop-blur-md ${getColor()} animate-fade-left`}>
             {message}
         </div>
     );
