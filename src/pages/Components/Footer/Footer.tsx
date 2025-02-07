@@ -9,7 +9,7 @@ const Footer = () => {
             <div className="container grid md:flex mb-8 md:mb-0 mx-auto justify-center px-4 md:justify-between items-center">
                 <p className="flex text-md">
                     © {new Date().getFullYear()} Spoekle. All rights reserved.
-                    <Link to="/privacystatement" className='ml-2 underline text-indigo-500 hover:text-blurple-dark transition duration-200'>
+                    <Link to="/privacy" className='ml-2 underline text-indigo-500 hover:text-blurple-dark transition duration-200'>
                         Privacy Statement
                     </Link>
                 </p>
