@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  genpass-frontend:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: genpass-frontend
+    ports:
+      - "8086:80"
+    restart: unless-stopped
