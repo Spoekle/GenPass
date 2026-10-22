@@ -1,4 +1,4 @@
-import { Option } from '../GeneratePass';
+import type { Option } from '@/types';
 
 // =============================================================================
 // STANDARD WORD LIST FOR MEMORABLE PASSWORDS

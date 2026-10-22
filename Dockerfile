@@ -1,32 +1,32 @@
 # Build stage
-FROM node:18-alpine AS build
+FROM node:22-alpine AS build
 
 # Set the working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json
+# Copy package manifests
 COPY package*.json ./
 
 # Install dependencies
-RUN npm install --force
+RUN npm install
 
-# Copy the rest of the application code
+# Copy application source code
 COPY . .
 
-# Build the application
+# Build static Next.js export
 RUN npm run build
 
 # Production stage
 FROM nginx:alpine
 
-# Copy the build output to the Nginx HTML directory
-COPY --from=build /app/dist /usr/share/nginx/html
+# Copy the static build output to the Nginx HTML directory
+COPY --from=build /app/out /usr/share/nginx/html
 
-# Copy the custom Nginx configuration file
+# Copy custom Nginx configuration
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Expose the port the app runs on
+# Expose web port
 EXPOSE 80
 
-# Start Nginx
+# Run Nginx in foreground
 CMD ["nginx", "-g", "daemon off;"]

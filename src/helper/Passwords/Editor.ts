@@ -1,15 +1,17 @@
-import type { Option } from './GeneratePass';
+import type { Option } from '@/types';
+import { safeLocalStorage } from '@/utils/storage';
 
-export const setPasswordOptions = (options: Option[]) => {
-  localStorage.setItem('passwordOptions', JSON.stringify(options));
+const STORAGE_KEY = 'passwordOptions';
+
+export const setPasswordOptions = (options: Option[]): void => {
+  safeLocalStorage.setJSON(STORAGE_KEY, options);
 };
 
 export const getPasswordOptions = (): Option[] => {
-  const savedOptions = localStorage.getItem('passwordOptions');
-  return savedOptions ? JSON.parse(savedOptions) : [];
+  return safeLocalStorage.getJSON<Option[]>(STORAGE_KEY, []);
 };
 
-export const importOptionsFromFile = (file: File, callback: (options: Option[]) => void) => {
+export const importOptionsFromFile = (file: File, callback: (options: Option[]) => void): void => {
   const reader = new FileReader();
   reader.onload = (event) => {
     try {
@@ -17,7 +19,7 @@ export const importOptionsFromFile = (file: File, callback: (options: Option[]) 
       if (Array.isArray(importedOptions)) {
         callback(importedOptions);
       } else {
-        console.error('Invalid JSON format');
+        console.error('Invalid JSON format: expected an array');
       }
     } catch (error) {
       console.error('Error parsing JSON', error);
@@ -26,7 +28,7 @@ export const importOptionsFromFile = (file: File, callback: (options: Option[]) 
   reader.readAsText(file);
 };
 
-export const exportOptionsToFile = (options: Option[]) => {
+export const exportOptionsToFile = (options: Option[]): void => {
   const dataStr = JSON.stringify(options, null, 2);
   const blob = new Blob([dataStr], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
@@ -36,4 +38,5 @@ export const exportOptionsToFile = (options: Option[]) => {
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
+  URL.revokeObjectURL(url);
 };
