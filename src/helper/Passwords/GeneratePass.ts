@@ -1,9 +1,8 @@
 import { standardOptions } from './options/StandardOptions';
+import type { Option } from '@/types';
+import { safeLocalStorage } from '@/utils/storage';
 
-export interface Option {
-    option: string;
-    weight: number;
-}
+export type { Option };
 
 // =============================================================================
 // CRYPTOGRAPHICALLY SECURE RANDOM NUMBER GENERATION
@@ -33,8 +32,6 @@ const secureRandomInt = (min: number, max: number): number => {
     return min + (randomValue % range);
 };
 
-
-
 // =============================================================================
 // PASSWORD GENERATION UTILITIES
 // =============================================================================
@@ -44,8 +41,7 @@ export const getStandardOptions = (): Option[] => {
 };
 
 export const getCustomOptions = (): Option[] => {
-    const savedOptions = localStorage.getItem('passwordOptions');
-    return savedOptions ? JSON.parse(savedOptions) : [];
+    return safeLocalStorage.getJSON<Option[]>('passwordOptions', []);
 };
 
 /**
